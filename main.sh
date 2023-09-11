@@ -233,3 +233,14 @@ db.medications.aggregate([
       }
   }
 ])
+
+# MAPREDUCE e FUNCTION
+# Exemplo de uso do $mapReduce para contar a quantidade de medicamentos com preços superiores a $5
+db.medications.mapReduce(
+  function() { emit("Medicamentos com preço > $5", 1); },
+  function(key, values) { return Array.sum(values); },
+  {
+    query: { price: { $gt: 5 } },
+    out: "medications_count_greater_than_5"
+  }
+)
