@@ -150,10 +150,6 @@ db.medications.createIndex({ "name": "text" })
 # Realizar uma pesquisa de texto para encontrar medicamentos que contenham a palavra "Aspirina"
 db.medications.find({ $text: { $search: "Aspirina" } })
 
-# $ALL
-# Consultar medicamentos que são analgésicos e antipiréticos usando $all
-db.medications.find({ "description": { $all: ["Analgésico", "Antipirético"] } })
-
 # $FILTER
 # Consultar medicamentos com preço superior a $5 e filtrar os resultados
 db.medications.aggregate([
