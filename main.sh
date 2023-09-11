@@ -41,8 +41,8 @@ db.products.insertOne({
 })
 
 # Operações de Consulta
-# Consultar todos os profissionais
-db.professionals.find()
+# Consultar todos os profissionais e usar o PRETTY
+db.professionals.find().pretty()
 
 # Consultar medicamentos com estoque maior que 100
 db.medications.find({ "stock": { $gt: 100 } })
@@ -105,7 +105,7 @@ db.medications.find().sort({ "price": -1 })
 db.medications.aggregate([
     {
         $match: {
-            "price": { $gt: 5 }
+            "price": { $gte: 5 }
         }
     }
 ])
@@ -187,3 +187,24 @@ db.medications.save({
     "price": 6.99,
     "stock": 200
 })
+
+# $SIZE
+# Consultar medicamentos com estoque de tamanho igual a 100 usando $size
+db.medications.find({ "stock": { $size: 100 } })
+
+# $EXISTS
+# Consultar medicamentos que têm a descrição definida usando $exists
+db.medications.find({ "description": { $exists: true } })
+
+# LIMIT
+# Limitar a consulta para retornar apenas os 5 primeiros medicamentos
+db.medications.find().limit(5)
+
+# RENAMECOLLECTION
+# Renomear a coleção "professionals" para "employees"
+db.professionals.renameCollection('employees')
+
+# FINDONE
+# Encontrar um único medicamento com preço inferior a $5 usando findOne
+db.medications.findOne({ "price": { $lt: 5 } })
+
