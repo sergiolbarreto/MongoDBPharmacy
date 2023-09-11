@@ -204,10 +204,6 @@ db.medications.find().limit(5)
 # Encontrar um único medicamento com preço inferior a $5 usando findOne
 db.medications.findOne({ "price": { $lt: 5 } })
 
-# RENAMECOLLECTION
-# Renomear a coleção "professionals" para "employees"
-db.professionals.renameCollection('employees')
-
 # ADDTOSET
 # Adicionar um novo medicamento com um campo "tags" usando $addToSet
 db.medications.updateOne(
@@ -244,3 +240,11 @@ db.medications.mapReduce(
     out: "medications_count_greater_than_5"
   }
 )
+
+# COUNT COUNTDOCUMENTS
+# Contar o número total de medicamentos na coleção "medications"
+db.medications.countDocuments()
+
+# RENAMECOLLECTION
+# Renomear a coleção "professionals" para "employees"
+db.professionals.renameCollection('employees')
