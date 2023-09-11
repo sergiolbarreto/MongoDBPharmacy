@@ -200,11 +200,36 @@ db.medications.find({ "description": { $exists: true } })
 # Limitar a consulta para retornar apenas os 5 primeiros medicamentos
 db.medications.find().limit(5)
 
-# RENAMECOLLECTION
-# Renomear a coleção "professionals" para "employees"
-db.professionals.renameCollection('employees')
-
 # FINDONE
 # Encontrar um único medicamento com preço inferior a $5 usando findOne
 db.medications.findOne({ "price": { $lt: 5 } })
 
+# RENAMECOLLECTION
+# Renomear a coleção "professionals" para "employees"
+db.professionals.renameCollection('employees')
+
+# ADDTOSET
+# Adicionar um novo medicamento com um campo "tags" usando $addToSet
+db.medications.updateOne(
+  { "name": "Novo Medicamento" },
+  {
+    $addToSet: {
+      "tags": "Nova Tag"
+    }
+  },
+  { upsert: true }
+)
+
+# LOOKUP
+# Exemplo de uso do $lookup para realizar uma junção entre as coleções "medications" e "products"
+db.medications.aggregate([
+  {
+    $lookup:
+      {
+        from: "products",
+        localField: "category",
+        foreignField: "category",
+        as: "product_info"
+      }
+  }
+])
