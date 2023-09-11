@@ -138,3 +138,52 @@ db.medications.updateOne(
     }
 )
 
+# $WHERE
+# Consultar medicamentos com preço superior a $5 usando $where
+db.medications.find({ $where: "this.price > 5" })
+
+
+# $TEXT e $SEARCH
+# Criar um índice de texto no campo "name" da coleção "medications"
+db.medications.createIndex({ "name": "text" })
+
+# Realizar uma pesquisa de texto para encontrar medicamentos que contenham a palavra "Aspirina"
+db.medications.find({ $text: { $search: "Aspirina" } })
+
+# $ALL
+# Consultar medicamentos que são analgésicos e antipiréticos usando $all
+db.medications.find({ "description": { $all: ["Analgésico", "Antipirético"] } })
+
+# $FILTER
+# Consultar medicamentos com preço superior a $5 e filtrar os resultados
+db.medications.aggregate([
+    {
+        $match: {
+            "price": { $gt: 5 }
+        }
+    },
+    {
+        $project: {
+            "name": 1,
+            "description": 1,
+            "price": 1,
+            "filteredStock": {
+                $filter: {
+                    input: "$stock",
+                    as: "stock",
+                    cond: { $gt: ["$$stock", 100] }
+                }
+            }
+        }
+    }
+])
+
+# $SAVE
+# Adicionar informações sobre um novo medicamento usando save (inserção)
+db.medications.save({
+    "_id": 3,
+    "name": "Ibuprofeno",
+    "description": "Analgésico e anti-inflamatório",
+    "price": 6.99,
+    "stock": 200
+})
