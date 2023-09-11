@@ -64,6 +64,102 @@ db.medications.insertMany([
     }
 ])
 
+
+db.professionals.insertMany([
+     {
+        "_id": 1,
+        "name": "Aspirina",
+        "description": "Analgésico e anti-inflamatório",
+        "price": 5.99,
+        "stock": 100
+    },
+
+    {
+        "_id": 2,
+        "name": "Paracetamol",
+        "description": "Analgésico e antipirético",
+        "price": 4.49,
+        "stock": 150
+    },
+
+    {
+        "_id": 3,
+        "name": "Atroveran",
+        "description": "remédio para cólica",
+        "price": 4.50,
+        "stock": 50
+    },
+    
+    {
+        "_id": 4,
+        "name": "Clonazepam",
+        "description": "sedativas, relaxantes e anticonvulsivantes",
+        "price": 5.00,
+        "stock": 100
+    },
+
+    {
+        "_id": 5,
+        "name": "amoxicilina",
+        "description": "antibióticos penicilânicos",
+        "price":7.80,
+        "stock":200
+    },
+
+    {
+        "_id": 6,
+        "name": "Dipirona sódica",
+        "description": "tratamento da dor e febre",
+        "price":7.38,
+        "stock":100
+    },
+
+
+    {
+        "_id": 7,
+        "name": "Desloratadina",
+        "description": "anti-histamínico",
+        "price":5.51,
+        "stock":50
+    },
+
+    {
+        "_id": 8,
+        "name": "fexofenadina",
+        "description": "anti-histamínico",
+        "price":6.00,
+        "stock":150
+    },
+
+
+    {
+        "_id": 9,
+        "name": "fluoxetina",
+        "description": "medicamento antidepressivo",
+        "price":6.00,
+        "stock":150
+    },
+
+    {
+        "_id": 10,
+        "name": "Furosemida",
+        "description": "remédio para pressão alta",
+        "price":6.00,
+        "stock":150
+    },
+
+
+    {
+        "_id": 11,
+        "name": "Losartana",
+        "description": "tratamento de hipertensão",
+        "price":6.00,
+        "stock":150
+    }
+
+
+])
+
 # Criando uma coleção para produtos diversos
 db.products.insertOne({
     "_id": 1,
