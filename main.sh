@@ -13,6 +13,32 @@ db.professionals.insertOne({
     }
 })
 
+# Inserindo mais profissionais
+db.professionals.insertMany([
+    {
+        "_id": 2,
+        "name": "Dr. Carlos Santos",
+        "specialty": "Dermatologia",
+        "license_number": "67890",
+        "contact": {
+            "email": "carlos@example.com",
+            "phone": "+1-098-765-4321"
+        }
+    },
+    {
+        "_id": 3,
+        "name": "Dra. Maria Oliveira",
+        "specialty": "Pediatria",
+        "license_number": "11223",
+        "contact": {
+            "email": "maria@example.com",
+            "phone": "+1-234-567-8901"
+        }
+    }
+])
+
+
+
 # Criando uma coleção para medicamentos
 db.medications.insertMany([
     {
@@ -28,6 +54,13 @@ db.medications.insertMany([
         "description": "Analgésico e antipirético",
         "price": 4.49,
         "stock": 150
+    },
+    {
+    "_id": 3,
+    "name": "Ibuprofeno",
+    "description": "Analgésico, anti-inflamatório e antipirético",
+    "price": 6.49,
+    "stock": 200
     }
 ])
 
@@ -39,6 +72,86 @@ db.products.insertOne({
     "price": 1.99,
     "stock": 500
 })
+
+db.products.insertMany([
+    {
+    "_id": 2,
+    "name": "Whey Protein",
+    "category": "Suplemento",
+    "price": 200,
+    "stock": 700
+    },
+    {
+    "_id": 3,
+    "name": "Sabonete Antibacteriano",
+    "category": "Higiene Pessoal",
+    "price": 2.99,
+    "stock": 300
+    }
+])
+
+
+# Criando uma coleção para clientes
+db.customers.insertOne({
+    "_id": 1,
+    "name": "João Silva",
+    "contact": {
+        "email": "joao@example.com",
+        "phone": "+1-345-678-9012"
+    },
+    "address": {
+        "street": "Rua das Flores, 123",
+        "city": "Recife",
+        "state": "PE",
+        "zip_code": "50000-000"
+    }
+})
+
+# Inserindo mais clientes
+db.customers.insertMany([
+    {
+        "_id": 2,
+        "name": "Maria Santos",
+        "contact": {
+            "email": "maria@example.com",
+            "phone": "+1-456-789-0123"
+        },
+        "address": {
+            "street": "Avenida Brasil, 456",
+            "city": "Recife",
+            "state": "PE",
+            "zip_code": "50000-001"
+        }
+    },
+    {
+        "_id": 3,
+        "name": "Carlos Oliveira",
+        "contact": {
+            "email": "carlos@example.com",
+            "phone": "+1-567-890-1234"
+        },
+        "address": {
+            "street": "Rua das Palmeiras, 789",
+            "city": "Recife",
+            "state": "PE",
+            "zip_code": "50000-002"
+        }
+    },
+    {
+        "_id": 4,
+        "name": "Ana Pereira",
+        "contact": {
+            "email": "ana@example.com",
+            "phone": "+1-678-901-2345"
+        },
+        "address": {
+            "street": "Avenida Recife, 012",
+            "city": "Recife",
+            "state": "PE",
+            "zip_code": "50000-003"
+        }
+    }
+])
 
 # Operações de Consulta
 # Consultar todos os profissionais e usar o PRETTY
@@ -65,14 +178,6 @@ db.medications.updateOne({ "name": "Aspirina" }, { $set: { "price": 6.49 } })
 db.products.updateMany({ "category": "Higiene Pessoal" }, { $inc: { "stock": 100 } })
 
 
-# Operações de Exclusão
-# Excluir um profissional
-db.professionals.deleteOne({ "_id": 1 })
-
-# Excluir todos os produtos de higiene pessoal
-db.products.deleteMany({ "category": "Higiene Pessoal" })
-
-
 #  Operações de Agregação
 # Calcular a média de preços de medicamentos
 db.medications.aggregate([
@@ -93,6 +198,14 @@ db.products.aggregate([
         }
     }
 ])
+
+
+# Operações de Exclusão
+# Excluir um profissional
+db.professionals.deleteOne({ "_id": 1 })
+
+# Excluir todos os produtos de higiene pessoal
+db.products.deleteMany({ "category": "Higiene Pessoal" })
 
 
 # Operador $sort
