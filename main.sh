@@ -383,7 +383,7 @@ db.medications.updateOne(
 
 # Operador $all
 # Consultar medicamentos que são analgésicos e antipiréticos
-db.medications.find({ functions: { $all: ["Analgésico", "Antipirético"]}}
+db.medications.find({ functions: { $all: ["Analgésico", "Antipirético"]}})
 
 
 # Operador $filter
