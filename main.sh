@@ -224,6 +224,79 @@ db.customers.insertOne({
     }
 })
 
+db.customers.insertMany([
+    {
+        "_id": 2,
+        "name": "Maria Santos",
+        "contact": {
+            "email": "maria@example.com",
+            "phone": "+1-456-789-0123"
+        },
+        "address": {
+            "street": "Avenida Brasil, 456",
+            "city": "Recife",
+            "state": "PE",
+            "zip_code": "50000-001"
+        }
+    },
+    {
+        "_id": 3,
+        "name": "Carlos Oliveira",
+        "contact": {
+            "email": "carlos@example.com",
+            "phone": "+1-567-890-1234"
+        },
+        "address": {
+            "street": "Rua das Palmeiras, 789",
+            "city": "Recife",
+            "state": "PE",
+            "zip_code": "50000-002"
+        }
+    },
+    {
+        "_id": 4,
+        "name": "Ana Pereira",
+        "contact": {
+            "email": "ana@example.com",
+            "phone": "+1-678-901-2345"
+        },
+        "address": {
+            "street": "Avenida Recife, 012",
+            "city": "Recife",
+            "state": "PE",
+            "zip_code": "50000-003"
+        }
+    },
+    {
+        "_id": 5,
+        "name":"Júlia Sampaio",
+        "contact":{
+                    "email": "julia@email.com",
+                    "phone": "(81) 99655-4433"
+                },
+        "address":{
+            "street": "Rua do Espinheiro",
+            "city": "Recife",
+            "state": "PE",
+            "zip_code": "52222-222"
+        }
+    },
+    {   "_id": 6,
+        "name":"Joana Bezerra",
+        "contact":{
+                "email": "joana@email.com",
+                "phone": "(81) 99755-4433"
+            },
+        "address": {
+            "street": "Av. Visconde de Albuquerque",
+            "city": "Recife",
+            "state": "PE",
+            "zip_code": "50000-000"
+        }
+    }
+    
+])
+
 # Inserindo mais clientes
 db.customers.insertMany([
     {
@@ -389,19 +462,16 @@ db.medications.find({ $text: { $search: "Aspirina" } })
 db.medications.aggregate([
     {
         $match: {
-            "price": { $gt: 5 }
+            "functions": "Broncodilatador"
         }
     },
     {
         $project: {
-            "name": 1,
-            "functions": 1,
-            "price": 1,
-            "filteredStock": {
+            "filteredFunctions": {
                 $filter: {
-                    input: "$stock",
-                    as: "stock",
-                    cond: { $gt: ["$$stock", 100] }
+                    input: "$functions",
+                    as: "func",
+                    cond: { $eq: ["$$func", "Broncodilatador"] }
                 }
             }
         }
@@ -419,8 +489,8 @@ db.medications.save({
 })
 
 # $SIZE
-# Consultar medicamentos com estoque de tamanho igual a 100 usando $size
-db.medications.find({ "stock": { $size: 100 } })
+# Consultar medicamentos que possuem 3 funcionalidades com $size
+db.medications.find({ "functions": { $size:3}})
 
 # $EXISTS
 # Consultar medicamentos que têm a funcao definida usando $exists
@@ -447,15 +517,15 @@ db.medications.updateOne(
 )
 
 # LOOKUP
-# Exemplo de uso do $lookup para realizar uma junção entre as coleções "medications" e "products"
-db.medications.aggregate([
+# Exemplo de uso do $lookup para realizar uma junção entre as coleções "customers" e "employees"
+db.customers.aggregate([
   {
     $lookup:
       {
-        from: "products",
-        localField: "category",
-        foreignField: "category",
-        as: "product_info"
+        from: "employees",
+        localField: "name",
+        foreignField: "name",
+        as: "employee_and_customer"
       }
   }
 ])
@@ -471,8 +541,6 @@ db.medications.mapReduce(
   }
 )
 
-# COUNT COUNTDOCUMENTS
+# COUNT COUNT
 # Contar o número total de medicamentos na coleção "medications"
-db.medications.countDocuments()
-
-
+db.medications.count()
