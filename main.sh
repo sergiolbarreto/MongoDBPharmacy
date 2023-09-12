@@ -270,6 +270,10 @@ db.customers.insertMany([
     }
 ])
 
+# RENAMECOLLECTION
+# Renomear a coleção "employees" para "employees"
+db.employees.renameCollection('professionals')
+
 # Operações de Consulta
 # Consultar todos os profissionais e usar o PRETTY
 db.professionals.find().pretty()
@@ -284,7 +288,7 @@ db.products.find({ "category": "Higiene Pessoal" })
 db.medications.find({ "name": "Aspirina" })
 
 # Consultar profissionais por especialidade
-db.professionals.find({ "specialty": "Cardiologia" })
+db.professionals.find({ "cargo": "Caixa" })
 
 
 # Operações de Atualização
@@ -471,6 +475,4 @@ db.medications.mapReduce(
 # Contar o número total de medicamentos na coleção "medications"
 db.medications.countDocuments()
 
-# RENAMECOLLECTION
-# Renomear a coleção "employees" para "employees"
-db.professionals.renameCollection('professionals')
+
