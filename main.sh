@@ -394,7 +394,6 @@ db.medications.updateOne(
 db.medications.find({ functions: { $all: ["Analgésico", "Antipirético"]}})
 
 
-# Operador $filter
 # Adicionar informações sobre fabricantes de medicamentos
 db.medications.updateOne(
     { "name": "Aspirina" },
