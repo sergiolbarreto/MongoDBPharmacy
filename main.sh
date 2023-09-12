@@ -1,42 +1,58 @@
 # CRIANDO O BD
 use Pharmacy
 
-# Criando uma coleção para profissionais
-db.professionals.insertOne({
-    "_id": 1,
-    "name": "Dr. Ana Silva",
-    "specialty": "Cardiologia",
-    "license_number": "12345",
-    "contact": {
-        "email": "ana@example.com",
-        "phone": "+1-123-456-7890"
-    }
+# Criando uma coleção para employees
+db.employees.insertOne({
+     "_id": 1,
+     "name": "Lucas Cardoso",
+     "cargo": "Atendente"
 })
 
-# Inserindo mais profissionais
-db.professionals.insertMany([
+db.employees.updateOne(
+    {"name": "Lucas Cardoso"},
     {
-        "_id": 2,
-        "name": "Dr. Carlos Santos",
-        "specialty": "Dermatologia",
-        "license_number": "67890",
-        "contact": {
-            "email": "carlos@example.com",
-            "phone": "+1-098-765-4321"
-        }
-    },
-    {
-        "_id": 3,
-        "name": "Dra. Maria Oliveira",
-        "specialty": "Pediatria",
-        "license_number": "11223",
-        "contact": {
-            "email": "maria@example.com",
-            "phone": "+1-234-567-8901"
+        $set: {
+            "salary": "R$ 1.500,00",
+            "start_date": "03-09-2021",
+            "contact":{
+                "email": "lucas@email.com",
+                "phone": "(81) 99955-4433"
+            }
         }
     }
-])
+)
 
+db.employees.insertMany([
+    {"_id": 2,
+    "name":"Júlia Sampaio",
+    "cargo":"Farmaceutico",
+    "salary": "R$ 3.000,00",
+    "start_date": "15-05-2022",
+    "contact":{
+                "email": "julia@email.com",
+                "phone": "(81) 99655-4433"
+            }
+    },
+    {"_id": 3,
+    "name":"Joana Bezerra",
+    "cargo":"Caixa",
+    "salary": "R$ 1.200,00",
+    "start_date": "25-06-2022",
+    "contact":{
+                "email": "joana@email.com",
+                "phone": "(81) 99755-4433"
+            }},
+
+    {"_id": 4,
+    "name":"João Machado",
+    "cargo":"Farmaceutico",
+    "salary": "R$ 3.000,00",
+    "start_date": "17-02-2023",
+    "contact":{
+                "email": "joao@email.com",
+                "phone": "(81) 99855-4433"
+            }}
+])
 
 # Criando uma coleção para medicamentos
 
@@ -456,5 +472,5 @@ db.medications.mapReduce(
 db.medications.countDocuments()
 
 # RENAMECOLLECTION
-# Renomear a coleção "professionals" para "employees"
-db.professionals.renameCollection('employees')
+# Renomear a coleção "employees" para "employees"
+db.professionals.renameCollection('professionals')
