@@ -38,29 +38,126 @@ db.professionals.insertMany([
 ])
 
 
-
 # Criando uma coleção para medicamentos
 db.medications.insertMany([
     {
         "_id": 1,
         "name": "Aspirina",
-        "description": "Analgésico e anti-inflamatório",
+        "functions": ["Analgésico", "Anti-inflamatório"],
         "price": 5.99,
         "stock": 100
     },
     {
         "_id": 2,
         "name": "Paracetamol",
-        "description": "Analgésico e antipirético",
+        "functions": ["Analgésico", "Antipirético"],
         "price": 4.49,
         "stock": 150
     },
     {
-    "_id": 3,
-    "name": "Ibuprofeno",
-    "description": "Analgésico, anti-inflamatório e antipirético",
-    "price": 6.49,
-    "stock": 200
+        "_id": 3,
+        "name": "Ibuprofeno",
+        "functions": ["Analgésico", "Anti-inflamatório", "Antipirético"],
+        "price": 6.49,
+        "stock": 200
+    },
+    {
+        "_id": 4,
+        "name": "Dramin",
+        "functions": ["Anti-emético", "Anti-vertiginoso"],
+        "price": 12.99,
+        "stock": 48
+    },
+    {
+        "_id": 5,
+        "name": "Cetamina",
+        "functions": ["Anestésico", "Alucinógeno"],
+        "price": 18.99,
+        "stock": 25
+    },
+    {
+        "_id": 6,
+        "name": "Amoxicilina",
+        "functions": ["Antibiótico"],
+        "price": 7.99,
+        "stock": 75
+    },
+    {
+        "_id": 7,
+        "name": "Omeprazol",
+        "functions": ["Antiácido", "Inibidor da bomba de prótons"],
+        "price": 9.99,
+        "stock": 120
+    },
+    {
+        "_id": 8,
+        "name": "Ranitidina",
+        "functions": ["Antiácido", "Antihistamínico"],
+        "price": 6.29,
+        "stock": 90
+    },
+    {
+        "_id": 9,
+        "name": "Morfina",
+        "functions": ["Analgésico", "Opiáceo"],
+        "price": 15.99,
+        "stock": 30
+    },
+    {
+        "_id": 10,
+        "name": "Losartana",
+        "functions": ["Anti-hipertensivo"],
+        "price": 8.49,
+        "stock": 60
+    },
+    {
+        "_id": 11,
+        "name": "Oxigênio",
+        "functions": ["Suplemento respiratório"],
+        "price": 29.99,
+        "stock": 1000
+    },
+    {
+        "_id": 12,
+        "name": "Insulina",
+        "functions": ["Antidiabético"],
+        "price": 12.79,
+        "stock": 50
+    },
+    {
+        "_id": 13,
+        "name": "Metrformina",
+        "functions": ["Antidiabético"],
+        "price": 5.99,
+        "stock": 80
+    },
+    {
+        "_id": 14,
+        "name": "Atorvastatina",
+        "functions": ["Hipolipemiante"],
+        "price": 7.99,
+        "stock": 70
+    },
+    {
+        "_id": 15,
+        "name": "Dexametasona",
+        "functions": ["Anti-inflamatório", "Imunossupressor"],
+        "price": 10.49,
+        "stock": 40
+    },
+    {
+        "_id": 16,
+        "name": "Salbutamol",
+        "functions": ["Broncodilatador"],
+        "price": 3.99,
+        "stock": 120
+    },
+    {
+        "_id": 17,
+        "name": "Hidroclorotiazida",
+        "functions": ["Diurético", "Anti-hipertensivo"],
+        "price": 6.99,
+        "stock": 55
     }
 ])
 
@@ -234,7 +331,7 @@ db.medications.updateOne(
 
 # Operador $all
 # Consultar medicamentos que são analgésicos e antipiréticos
-db.medications.find({ "description": { $all: ["Analgésico", "Antipirético"] } })
+db.medications.find({ functions: { $all: ["Analgésico", "Antipirético"]}}
 
 
 # Operador $filter
@@ -274,7 +371,7 @@ db.medications.aggregate([
     {
         $project: {
             "name": 1,
-            "description": 1,
+            "functions": 1,
             "price": 1,
             "filteredStock": {
                 $filter: {
@@ -290,11 +387,11 @@ db.medications.aggregate([
 # $SAVE
 # Adicionar informações sobre um novo medicamento usando save (inserção)
 db.medications.save({
-    "_id": 3,
-    "name": "Ibuprofeno",
-    "description": "Analgésico e anti-inflamatório",
-    "price": 6.99,
-    "stock": 200
+    "_id": 18,
+    "name": "Loratadina",
+    "functions": ["Antialérgico", "Antihistamínico"],
+    "price": 4.99,
+    "stock":85
 })
 
 # $SIZE
@@ -302,8 +399,8 @@ db.medications.save({
 db.medications.find({ "stock": { $size: 100 } })
 
 # $EXISTS
-# Consultar medicamentos que têm a descrição definida usando $exists
-db.medications.find({ "description": { $exists: true } })
+# Consultar medicamentos que têm a funcao definida usando $exists
+db.medications.find({ "functions": { $exists: true } })
 
 # LIMIT
 # Limitar a consulta para retornar apenas os 5 primeiros medicamentos
