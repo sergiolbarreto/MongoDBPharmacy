@@ -178,7 +178,15 @@ db.medications.insertMany([
         "functions": ["Diurético", "Anti-hipertensivo"],
         "price": 6.99,
         "stock": 55
+    },
+    
+    {
+        "_id": 21,
+        "name": "Placebo",
+        "price": 5.99,
+        "stock": 100
     }
+
 ])
 
 # Criando uma coleção para produtos diversos
