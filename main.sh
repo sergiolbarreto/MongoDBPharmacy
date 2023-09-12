@@ -456,7 +456,7 @@ db.medications.find({ "functions": { $size:3}})
 
 # $EXISTS
 # Consultar medicamentos que têm a funcao definida usando $exists
-db.medications.find({ "functions": { $exists:true}})
+db.medications.find({ "functions": { $exists:false}})
 
 # LIMIT
 # Limitar a consulta para retornar apenas os 5 primeiros medicamentos
