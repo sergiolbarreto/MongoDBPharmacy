@@ -39,14 +39,17 @@ db.professionals.insertMany([
 
 
 # Criando uma coleção para medicamentos
+
+
 db.medications.insertMany([
-    {
+     {
         "_id": 1,
         "name": "Aspirina",
         "functions": ["Analgésico", "Anti-inflamatório"],
         "price": 5.99,
         "stock": 100
     },
+
     {
         "_id": 2,
         "name": "Paracetamol",
@@ -54,6 +57,7 @@ db.medications.insertMany([
         "price": 4.49,
         "stock": 150
     },
+
     {
         "_id": 3,
         "name": "Ibuprofeno",
