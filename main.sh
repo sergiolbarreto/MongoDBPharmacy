@@ -297,51 +297,6 @@ db.customers.insertMany([
     
 ])
 
-# Inserindo mais clientes
-db.customers.insertMany([
-    {
-        "_id": 2,
-        "name": "Maria Santos",
-        "contact": {
-            "email": "maria@example.com",
-            "phone": "+1-456-789-0123"
-        },
-        "address": {
-            "street": "Avenida Brasil, 456",
-            "city": "Recife",
-            "state": "PE",
-            "zip_code": "50000-001"
-        }
-    },
-    {
-        "_id": 3,
-        "name": "Carlos Oliveira",
-        "contact": {
-            "email": "carlos@example.com",
-            "phone": "+1-567-890-1234"
-        },
-        "address": {
-            "street": "Rua das Palmeiras, 789",
-            "city": "Recife",
-            "state": "PE",
-            "zip_code": "50000-002"
-        }
-    },
-    {
-        "_id": 4,
-        "name": "Ana Pereira",
-        "contact": {
-            "email": "ana@example.com",
-            "phone": "+1-678-901-2345"
-        },
-        "address": {
-            "street": "Avenida Recife, 012",
-            "city": "Recife",
-            "state": "PE",
-            "zip_code": "50000-003"
-        }
-    }
-])
 
 # RENAMECOLLECTION
 # Renomear a coleção "employees" para "employees"
@@ -494,7 +449,7 @@ db.medications.find({ "functions": { $size:3}})
 
 # $EXISTS
 # Consultar medicamentos que têm a funcao definida usando $exists
-db.medications.find({ "functions": { $exists: true } })
+db.medications.find({ "functions": { $exists:true}})
 
 # LIMIT
 # Limitar a consulta para retornar apenas os 5 primeiros medicamentos
@@ -517,18 +472,18 @@ db.medications.updateOne(
 )
 
 # LOOKUP
-# Exemplo de uso do $lookup para realizar uma junção entre as coleções "customers" e "employees"
+# Exemplo de uso do $lookup para realizar uma junção entre as coleções "customers" e "professionals"
 db.customers.aggregate([
   {
     $lookup:
       {
-        from: "employees",
+        from: "professionals",
         localField: "name",
         foreignField: "name",
         as: "employee_and_customer"
       }
   }
-])
+]).pretty()
 
 # MAPREDUCE e FUNCTION
 # Exemplo de uso do $mapReduce para contar a quantidade de medicamentos com preços superiores a $5
